@@ -443,6 +443,15 @@ RUN export DEBIAN_FRONTEND=noninteractive \
             /usr/share/info \
     && find /var/log -type f -exec truncate --size 0 {} \;
 
+RUN apt-get update \
+    && apt-get install -y rsync openssh-client \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
+            /var/cache/debconf/* \
+            /usr/share/doc \
+            /usr/share/man \
+            /lib/systemd/system/rsync.service
+
 ARG COMPRESS=false
 
 RUN set -ex \
@@ -467,7 +476,7 @@ RUN set -ex \
 FROM scratch
 COPY --from=builder / /
 
-LABEL maintainer="Alexander Kukushkin <alexander.kukushkin@zalando.de>"
+LABEL maintainer="Erik Inge Bolsø <erik.inge.bolso@nrk.no>"
 
 ARG PGVERSION
 
