@@ -25,6 +25,7 @@ for i in $(seq 0 7); do
     fi
 done
 chown -R postgres:postgres "$PGROOT"
+chmod 700 "$PGROOT/data"
 
 if [ "$DEMO" = "true" ]; then
     sed -i '/motd/d' /root/.bashrc
