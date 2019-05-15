@@ -504,4 +504,16 @@ RUN mkdir -p /var/log/supervisor \
 COPY scripts bootstrap /scripts/
 COPY scm-source.json launch.sh /
 
+RUN chown -R postgres:postgres /bin && \
+    chown -R postgres:postgres /etc && \
+    chown -R postgres:postgres /lib && \
+    chown -R postgres:postgres /run && \
+    chown -R postgres:postgres /sbin && \
+    chown -R postgres:postgres /usr && \
+    chown -R postgres:postgres /var && \
+    chown postgres:postgres /launch.sh && \
+    sed -i '10 a rm /etc/supervisor/conf.d/cron.conf' /launch.sh
+
+USER 101
+
 CMD ["/bin/sh", "/launch.sh"]
