@@ -521,6 +521,7 @@ RUN chown -R postgres:postgres /bin && \
     chown -R postgres:postgres /usr && \
     chown -R postgres:postgres /var && \
     chown postgres:postgres /launch.sh && \
+    chown postgres:postgres /a.tar.xz && \
     sed -i '10 a rm /etc/supervisor/conf.d/cron.conf' /launch.sh
 
 USER 101
